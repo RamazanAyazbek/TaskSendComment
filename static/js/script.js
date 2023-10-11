@@ -1,24 +1,22 @@
-// Add star rating
-const rating = document.querySelector('form[name=rating]');
-console.log("Working")
-// alert("ramazan")
-rating.addEventListener("change", function (e) {
-    // Получаем данные из формы
-    let data = new FormData(this);
-    fetch(`${this.action}`, {
-        method: 'POST',
-        body: data
-    })
-        .then(response => alert("Рейтинг установлен"))
-        .catch(error => alert("Ошибка"))
-        console.log("Working")
-});
 
-
-
-
-
-
-
-
-
+    const form = document.querySelector('#formReview'); 
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+            } else {
+        
+                window.location.href = data.redirect_url;
+            }
+        })
+        .catch(error => {
+        
+            console.error('Error:', error);
+        });
+    });

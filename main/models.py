@@ -16,10 +16,11 @@ class Post(models.Model):
 class Review(models.Model):
     email=models.EmailField()
     name=models.CharField("Имя", max_length=255)
-    text=models.TextField("Сообщение", max_length=500)
+    text=models.TextField("Сообщение", max_length=500, blank=True, null=True)
     parent=models.ForeignKey('self', verbose_name="Родитель",  on_delete=models.SET_NULL, blank=True, null=True)
     post=models.ForeignKey(Post, verbose_name="пост", on_delete=models.CASCADE)
-    photo = models.ImageField("Фото", upload_to='review_photos/', blank=True, null=True)  #
+    photo = models.ImageField("Фото", upload_to='review_photos/', blank=True, null=True)  
+    modified_by_admin = models.BooleanField("Изменено администратором", default=False) 
     def __str__(self):
         return f'{self.name} - {self.post}'
     
