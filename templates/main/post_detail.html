@@ -98,6 +98,77 @@
             <div class="comments-section">
                 {% for review in post.get_review %}
                 <div class="comment">
+                    <div class="commenter-info">
+                        <img src="{% static 'images/commentroditel.png' %}" class="mr-3 img-fluid"
+                            style="width:50px; height:50px; border-radius:50%;" alt="image">
+                        <h5 class="post-title">{{ review.name }}</h5>
+                    </div>
+                    <div class="media-body mt-4">
+                        <p>{{ review.text }}</p>
+                        {% if review.photo %}
+                        <img src="{{ review.photo.url }}" style="width:50px; height:50px; " class="img-fluid"
+                            alt="comment-photo">
+                        {% endif %}
+                        {% for rew in review.review_set.all %}
+                        <div class="media mt-5 comment">
+                            <div class="commenter-info">
+                                <img src="{% static 'images/commentroditel.png' %}" class="mr-3 img-fluid"
+                                    style="width:50px; height:50px; border-radius:50%;" alt="image">
+                                <h5 class="post-title">{{ rew.name }}</h5>
+                            </div>
+                            <div class="media-body">
+                                <p>{{ rew.text }}</p>
+                                {% if rew.photo %}
+                                <img src="{{ rew.photo.url }}" style="width:50px; height:50px;" class="img-fluid"
+                                    alt="comment-photo">
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <style>
+                .comment {
+                    display: flex;
+                    margin-bottom: 20px;
+                }
+            
+                .commenter-info {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    margin-right: 10px;
+                }
+            
+                .commenter-info img {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                }
+            
+                .commenter-info h5 {
+                    font-size: 16px;
+                    margin: 0;
+                }
+            
+                .media-body p {
+                    font-size: 14px;
+                }
+            
+                .commenter-info img, .media-body img {
+                    max-width: 50px;
+                    max-height: 50px;
+                    /* border-radius: 50%; */
+                }
+            </style>
+            
+            
+            <!-- <div class="comments-section">
+                {% for review in post.get_review %}
+                <div class="comment">
                     <img src="{% static 'images/commentroditel.png' %}" class="mr-3 img-fluid"
                         style="width:50px; height:50px; border-radius:50%;" alt="image">
                     <div class="media-body mt-4">
@@ -105,7 +176,6 @@
                         <p>{{ review.text }}</p>
                         <a href="#formReview" onclick="addReview('{{review.name}}', '{{review.id}}')">Ответить</a>
                         {% if review.photo %}
-                        <h1>Photo est</h1>
                         <img src="{{ review.photo.url }}" style="width:50px; height:50px; border-radius:50%;" class="img-fluid"
                             alt="comment-photo">
                         {% endif %}
@@ -129,7 +199,7 @@
                     </div>
                 </div>
                 {% endfor %}
-            </div>
+            </div> -->
             
             <!-- <div class="comments-section">
                 {% for review in post.get_review %}

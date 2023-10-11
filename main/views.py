@@ -12,11 +12,12 @@ class PostDetialView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["form"] =ReviewForm()
+        
         return context
 
 class AddReview(View):
     def post(self, request, pk):
-        form = ReviewForm(request.POST)
+        form = ReviewForm(request.POST, request.FILES)
         post=Post.objects.get(id=pk)
         if form.is_valid:
             form=form.save(commit=False)
