@@ -19,7 +19,7 @@ class Review(models.Model):
     text=models.TextField("Сообщение", max_length=500)
     parent=models.ForeignKey('self', verbose_name="Родитель",  on_delete=models.SET_NULL, blank=True, null=True)
     post=models.ForeignKey(Post, verbose_name="пост", on_delete=models.CASCADE)
-    photo = models.ImageField("Фото", upload_to='review_photos/')  #
+    photo = models.ImageField("Фото", upload_to='review_photos/', blank=True, null=True)  #
     def __str__(self):
         return f'{self.name} - {self.post}'
     
